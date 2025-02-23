@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: online_library
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/6008
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+mybatis:
+  configuration:
+    #日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #开启驼峰原则映射开关
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.onlineLibrary.entity
+
+logging:
+    level:
+      org.springframework.web: DEBUG
+      org.springframework.http: DEBUG
+      org.springframework.web.servlet: DEBUG
+

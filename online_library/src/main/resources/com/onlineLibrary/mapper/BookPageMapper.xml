@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.onlineLibrary.mapper.BookPageMapper">
+
+    <!--插入评论-->
+    <insert id="insertComment" useGeneratedKeys="true" keyProperty="id">
+        insert into comments(book_id, content, rating,
+                             create_time, create_user, update_time, update_user)
+        VALUES (#{bookId},#{content},#{rating},
+                #{createTime},#{createUser},#{updateTime},#{updateUser})
+    </insert>
+
+    <!--计算rating-->
+    <select id="getAverageRating" resultType="java.lang.Double">
+        SELECT AVG(rating) FROM comments WHERE book_id = #{bookId}
+    </select>
+
+    <!--更新rating-->
+    <update id="updateBookRating">
+        UPDATE book
+        SET rating = #{averageRating}
+        WHERE id = #{bookId}
+    </update>
+
+    <!--查询书籍-->
+    <select id="select01" resultType="com.onlineLibrary.VO.BooksVO">
+        select * from book
+        <where>
+            <if test="title != null and title !=''">
+                and title like concat('%',#{title},'%')
+            </if>
+            <if test="author != null and author !=''">
+                and author like concat('%',#{author},'%')
+            </if>
+            <if test="isbn != null and isbn !=''">
+                and isbn like concat('%',#{isbn},'%')
+            </if>
+            <if test="category != null and category !=''">
+                and category like concat('%',#{category},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--根据评分rating查询书籍，精确到0.1-->
+    <select id="getBooksByRating" resultType="com.onlineLibrary.VO.BooksVO">
+        SELECT * FROM book
+        WHERE rating BETWEEN #{rating} - 0.1 AND #{rating} + 0.1
+    </select>
+
+    <!--根据出版日期publishDate查询书籍，精确到1-->
+    <select id="getBooksByPublishDate" resultType="com.onlineLibrary.VO.BooksVO">
+        SELECT * FROM book
+        WHERE publishDate BETWEEN #{publishDate} - 1 AND #{publishDate} + 1
+    </select>
+
+    <!-- 根据 category 查询书籍的 SQL -->
+    <select id="getBooksByCategory" resultType="com.onlineLibrary.VO.BooksVO">
+        SELECT * FROM book
+        WHERE category = #{category}
+    </select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.onlineLibrary.mapper.BookManagementMapper">
+
+    <!--插入新书-->
+    <insert id="addbook">
+        insert into book(title, author, publisher, isbn, publishDate, category,
+                         cover, rating, description, location, callNumber, availableCopies,
+                         totalCopies, available, create_time)
+        VALUES (#{title},#{author},#{publisher},#{isbn},#{publishDate},#{category},#{cover},#{rating},#{description}
+               ,#{location},#{callNumber},#{availableCopies},#{totalCopies},#{available},#{createTime})
+    </insert>
+
+    <!--删除书籍-->
+    <delete id="deletByIds">
+        delete from book where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--根据id查询书籍-->
+    <select id="getById" resultType="com.onlineLibrary.entity.Books">
+        select  * from book where id = #{id}
+    </select>
+
+    <!--修改书籍信息-->
+    <update id="updateBooks">
+        update book
+        <set>
+            <if test="title != null and title !=''">title = #{title},</if>
+            <if test="author != null and author !=''">author = #{author},</if>
+            <if test="publisher != null and publisher !=''">publisher = #{publisher},</if>
+            <if test="isbn != null and isbn !=''">isbn = #{isbn},</if>
+            <if test="publishDate != null ">publishDate = #{publishDate},</if>
+            <if test="category != null and category !=''">category = #{category},</if>
+            <if test="cover != null and cover !=''">cover = #{cover},</if>
+            <if test="description != null and description !=''">description = #{description},</if>
+            <if test="location != null and location !=''">location = #{location},</if>
+            <if test="callNumber != null and callNumber !=''">callNumber = #{callNumber},</if>
+            <if test="availableCopies != null ">availableCopies = #{availableCopies},</if>
+            <if test="totalCopies != null ">totalCopies = #{totalCopies},</if>
+            <if test="available != null ">available = #{available},</if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

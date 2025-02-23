@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.onlineLibrary.mapper.HelpPageMapper">
+    <update id="updateStatus"></update>
+
+    <select id="select02" resultType="com.onlineLibrary.VO.RequestManagementVO">
+        SELECT * FROM request_form
+        WHERE status = 0
+        <if test="title != null and title != ''">
+            AND title LIKE CONCAT('%', #{title}, '%')
+        </if>
+        <if test="author != null and author != ''">
+            AND author LIKE CONCAT('%', #{author}, '%')
+        </if>
+    </select>
+
+    <select id="select03" resultType="com.onlineLibrary.VO.RequestManagementVO">
+        SELECT * FROM request_form
+        where create_user = #{createUser}
+        <if test="status != null">
+             AND status = #{status}
+        </if>
+    </select>
+</mapper>

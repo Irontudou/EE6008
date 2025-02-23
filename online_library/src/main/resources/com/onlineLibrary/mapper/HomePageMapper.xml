@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.onlineLibrary.mapper.HomePageMapper">
+
+    <select id="select01" resultType="com.onlineLibrary.entity.Books">
+        select * from book
+        <where>
+            <if test="title != null and title !=''">
+                and title like concat('%',#{title},'%')
+            </if>
+            <if test="author != null and author !=''">
+                and author like concat('%',#{author},'%')
+            </if>
+            <if test="isbn != null and isbn !=''">
+                and isbn like concat('%',#{isbn},'%')
+            </if>
+            <if test="category != null and category !=''">
+                and category like concat('%',#{category},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
