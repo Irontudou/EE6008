@@ -17,6 +17,7 @@ public class BooksPageQueryDTO implements Serializable {
     private String author;
     private String isbn;
     private String publisher; // 出版社
+    private Integer rating;// 评分
     private LocalDateTime publishDate; // 出版日期
     private String category; // 分类
 

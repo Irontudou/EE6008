@@ -5,7 +5,7 @@
 
 <mapper namespace="com.onlineLibrary.mapper.HomePageMapper">
 
-    <select id="select01" resultType="com.onlineLibrary.entity.Books">
+    <select id="select01" resultType="com.onlineLibrary.VO.BooksVO">
         select * from book
         <where>
             <if test="title != null and title !=''">

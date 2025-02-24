@@ -46,43 +46,21 @@ public class BookPageController {
         PageResult pageResult = bookPageService.pageQuery(booksPageQueryDTO);
         return Result.success(pageResult);
     }
-    //查询
 
 
     /**
-     * 根据滑条rating搜索书籍
-     * @param rating
+     * 滑条查询书籍并分页展示
+     * @param booksPageQueryDTO, rating, publishDate, category在BooksPageQueryDTO中
      * @return
      */
-    @GetMapping("/rating")   // 这里用/{id}还是/id？？查询回显为啥用{id}来着？？
-    public Result<List<BooksVO>> getBooksByRating(Integer rating){
 
-        List<BooksVO> listBooks = bookPageService.getBooksByRating(rating);
-        return Result.success(listBooks);
+    @GetMapping("/sildeQuery")// 这里用/{id}还是/id？？查询回显为啥用{id}来着？？这里路径用什么？？？？？？？page吗？？？？那上面那个page是不是就不再需要了？？
+    @CrossOrigin()
+    public Result<PageResult> slideQuery(BooksPageQueryDTO booksPageQueryDTO){
+        PageResult pageResult = bookPageService.slideQuery(booksPageQueryDTO);
+        return Result.success(pageResult);
     }
 
-    /**
-     * 根据滑条publishYear搜索书籍
-     * @param publishDate
-     * @return
-     */
-    @GetMapping("/publishDate")   // 这里用/{id}还是/id？？查询回显为啥用{id}来着？？
-    public Result<List<BooksVO>> getBooksByPublishDate(Integer publishDate){
 
-        List<BooksVO> listBooks = bookPageService.getBooksByPublishDate(publishDate);
-        return Result.success(listBooks);
-    }
-
-    /**
-     * 根据标签category搜索书籍
-     * @param category
-     * @return
-     */
-    @GetMapping("/category")   // 这里用/{id}还是/id？？查询回显为啥用{id}来着？？
-    public Result<List<BooksVO>> getBooksByPublishDate(String category){
-
-        List<BooksVO> listBooks = bookPageService.getBooksByCategory(category);
-        return Result.success(listBooks);
-    }
 
 }

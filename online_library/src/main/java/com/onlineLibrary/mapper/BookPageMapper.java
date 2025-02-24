@@ -40,24 +40,14 @@ public interface BookPageMapper {
     Page<BooksVO> select01(BooksPageQueryDTO booksPageQueryDTO);
 
     /**
-     * 根据评分查询书籍
-     * @param rating
+     * 条件查询书籍并分页展示。用滑条作条件，分别rating, publishDate, category三个参数
+     * @param booksPageQueryDTO
      * @return
      */
-    List<BooksVO> getBooksByRating(Integer rating);
+    Page<BooksVO> select02(BooksPageQueryDTO booksPageQueryDTO);
 
 
-    /**
-     * 根据出版年份查询书籍
-     * @param publishDate
-     * @return
-     */
-    List<BooksVO> getBooksByPublishDate(Integer publishDate);
 
-    /**
-     * 根据标签category查询书籍
-     * @param category
-     * @return
-     */
-    List<BooksVO> getBooksByCategory(String category);
+
+
 }

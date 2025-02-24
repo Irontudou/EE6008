@@ -74,31 +74,23 @@ public class BookPageServiceImpl implements BookPageService {
         return new PageResult(total, records);
     }
 
-
     @Override
-    public List<BooksVO> getBooksByRating(Integer rating) {
+    public PageResult slideQuery(BooksPageQueryDTO booksPageQueryDTO) {
+        //设置分页参数
+        PageHelper.startPage(booksPageQueryDTO.getPage(), booksPageQueryDTO.getPageSize());
 
-        List<BooksVO> listBooksVO = bookPageMapper.getBooksByRating(rating);
+        //调用Mapper查数据
+        Page<BooksVO> page = bookPageMapper.select02(booksPageQueryDTO);
+        //数据封装
+        long total = page.getTotal();
+        List<BooksVO> records = page.getResult();
 
-        return listBooksVO;
+        return new PageResult(total, records);
     }
 
 
-    @Override
-    public List<BooksVO> getBooksByPublishDate(Integer publishDate) {
 
-        List<BooksVO> listBooksVO = bookPageMapper.getBooksByPublishDate(publishDate);
 
-        return listBooksVO;
-    }
-
-    @Override
-    public List<BooksVO> getBooksByCategory(String category) {
-
-        List<BooksVO> listBooksVO = bookPageMapper.getBooksByCategory(category);
-
-        return listBooksVO;
-    }
 
 
 
