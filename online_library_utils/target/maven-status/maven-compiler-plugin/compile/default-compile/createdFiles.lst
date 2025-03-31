@@ -5,3 +5,4 @@ com\onlineLibrary\result\PageResult.class
 com\onlineLibrary\constant\AutoFillConstant.class
 com\onlineLibrary\enumeration\OperationType.class
 com\onlineLibrary\constant\MessageConstant.class
+com\onlineLibrary\utils\JwtUtils.class

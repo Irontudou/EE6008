@@ -11,8 +11,10 @@ com\onlineLibrary\entity\Comments.class
 com\onlineLibrary\DTO\BooksPageQueryDTO.class
 com\onlineLibrary\entity\User.class
 com\onlineLibrary\VO\UserManagementVO.class
+com\onlineLibrary\DTO\PublicationDTO.class
 com\onlineLibrary\DTO\ContactDTO.class
 com\onlineLibrary\VO\BooksVO.class
 com\onlineLibrary\DTO\UsersPageQueryDTO.class
 com\onlineLibrary\DTO\BooksDTO.class
 com\onlineLibrary\DTO\LoginDTO.class
+com\onlineLibrary\entity\Publication.class

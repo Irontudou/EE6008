@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.onlineLibrary.mapper.PublicationPageMapper">
+
+    <!--查询期刊-->
+    <select id="select" resultType="com.onlineLibrary.entity.Publication">
+        select id,author, title, publication_year, cited_count, doi from publications
+        <where>
+            <if test="title != null and title !=''">
+                and title like concat('%',#{title},'%')
+            </if>
+            <if test="doi != null and isbn !=''">
+                and doi = #{doi}
+            </if>
+            <if test="publicationYear != null">
+                and publication_year = #{publicationYear}
+            </if>
+        </where>
+        ORDER BY cited_count DESC  <!-- 添加排序 -->
+    </select>
+</mapper>
